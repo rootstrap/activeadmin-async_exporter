@@ -15,4 +15,9 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://rubygems.org/gems/activeadmin_async_exporter'
   s.license     = 'MIT'
   s.files       = Dir['lib/**/*.rb']
+
+  # Dependencies
+  s.add_dependency 'rails', '>= 1.0.0'
+  s.add_dependency 'activeadmin', '>= 1.0.0.pre1'
+  s.add_dependency 'sidekiq', '>= 1.0.0'
 end

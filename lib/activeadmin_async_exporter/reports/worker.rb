@@ -8,24 +8,10 @@ module ActiveadminAsyncExporter
       controller = options['controller'].classify.constantize.new
       columns = options['columns']
 
-      headers = columns.keys
-      evaluators = columns.values
+      path = Rails.root.join('tmp', filename(controller))
 
-      path = "#{Rails.root.to_s}/tmp/#{filename(controller)}"
-      
       CSV.open(path, 'wb', headers: true) do |csv|
-        csv << headers.map { |key| key.to_s }
-
-        collection(controller, options).find_in_batches do |group|
-          group.each do |m|
-            m = m.decorate if options['decorate_model']
-            values = []
-            evaluators.each do |ev|
-              values << m.send(ev)
-            end
-            csv << values
-          end
-        end
+        build_csv(csv, columns, controller, options)
       end
     end
 
@@ -36,7 +22,21 @@ module ActiveadminAsyncExporter
     end
 
     def filename(controller)
-      [controller.scoped_collection.name.pluralize.try(:downcase), Time.current.try(:to_i)].join('_') + '.csv'
+      [controller.scoped_collection.name.pluralize.downcase, Time.current.to_i].join('_') + '.csv'
+    end
+
+    def build_csv(csv, columns, controller, options)
+      headers = columns.keys
+      evaluators = columns.values
+
+      csv << headers.map(&:to_s)
+
+      collection(controller, options).find_in_batches do |group|
+        group.each do |m|
+          m = m.decorate if options['decorate_model']
+          csv << evaluators.collect { |ev| m.send(ev) }
+        end
+      end
     end
   end
 end

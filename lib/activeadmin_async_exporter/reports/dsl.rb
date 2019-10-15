@@ -6,13 +6,13 @@ module ActiveadminAsyncExporter
       def csv_report(columns:, decorate_model: false)
         action_item :download_csv, only: :index do
           link_to 'Download CSV',
-            { action: :download_csv, params: params },
-            { method: :post, data: { confirm: 'Are you sure you want to generate this report?' } }
+                  { action: :download_csv, params: params },
+                  method: :post, data: { confirm: 'Are you sure you want to generate this report?' }
         end
 
         collection_action :download_csv, method: :post do
           options = {
-            controller: self.class.to_s,
+            controller: self.class.name,
             columns: columns,
             decorate_model: decorate_model,
             query: params['q']

@@ -6,6 +6,6 @@ require 'activeadmin_async_exporter/reports/worker'
 
 class Railtie < ::Rails::Railtie
   config.after_initialize do
-    ActiveAdmin::ResourceDSL.send :include, ActiveadminAsyncExporter::Reports::DSL
+    ActiveAdmin::ResourceDSL.include ActiveadminAsyncExporter::Reports::DSL
   end
 end

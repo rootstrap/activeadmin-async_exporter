@@ -9,7 +9,11 @@ module ActiveadminAsyncExporter
     source_root File.join(__dir__, 'templates')
 
     def create_admin_reports_migration
-      migration_template 'migration.rb', 'db/migrate/add_admin_reports.rb', migration_version: migration_version
+      migration_template(
+        'migration.rb',
+        'db/migrate/add_admin_reports.rb',
+        migration_version: migration_version
+      )
     end
 
     private

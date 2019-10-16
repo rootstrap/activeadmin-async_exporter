@@ -14,5 +14,5 @@ Gem::Specification.new do |s|
   s.email       = 'franco@rootstrap.com'
   s.homepage    = 'https://rubygems.org/gems/activeadmin_async_exporter'
   s.license     = 'MIT'
-  s.files       = Dir['lib/**/*.rb']
+  s.files       = Dir['lib/**/*.{rb,tt}']
 end

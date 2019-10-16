@@ -1,0 +1,14 @@
+class <%= migration_class_name %> < ActiveRecord::Migration<%= migration_version %>
+  def change
+    create_table :admin_reports do |t|
+      t.references :user, index: true
+
+      t.string :entity, null: false
+      t.string :format, null: false, default: :csv
+      t.string :status, null: false
+      t.string :location_url
+
+      t.timestamps
+    end
+  end
+end

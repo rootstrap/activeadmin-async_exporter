@@ -17,7 +17,9 @@ module ActiveadminAsyncExporter
             decorate_model: decorate_model,
             query: params['q']
           }
+
           ActiveadminAsyncExporter::Worker.perform_async(options)
+
           redirect_to(action: :index)
         end
       end

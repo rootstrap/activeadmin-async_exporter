@@ -34,6 +34,7 @@ module ActiveadminAsyncExporter
       collection(controller, options).find_in_batches do |group|
         group.each do |m|
           m = m.decorate if options['decorate_model']
+
           csv << evaluators.collect { |ev| m.send(ev) }
         end
       end

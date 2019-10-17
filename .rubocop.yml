@@ -1,0 +1,18 @@
+Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 15
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 24
+
+Metrics/LineLength:
+  Max: 100
+
+Style/SymbolArray:
+  Enabled: true
+
+Style/BlockDelimiters:
+  EnforcedStyle: braces_for_chaining

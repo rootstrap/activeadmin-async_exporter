@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+class AdminReport < ApplicationRecord
+  belongs_to :<%= user_class_name %>
+end

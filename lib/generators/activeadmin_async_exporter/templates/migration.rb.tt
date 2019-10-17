@@ -1,7 +1,8 @@
-class <%= migration_class_name %> < ActiveRecord::Migration<%= migration_version %>
+class <%= migration_class_name %> < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
   def change
     create_table :admin_reports do |t|
-      t.references :user, index: true
+      t.references :<%= user_class_name %>, index: true
+
       t.string :entity, null: false
       t.string :format, null: false, default: :csv
       t.string :status, null: false

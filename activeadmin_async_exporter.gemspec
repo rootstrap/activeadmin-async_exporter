@@ -19,7 +19,8 @@ Gem::Specification.new do |s|
   # Dependencies
   s.add_dependency 'activeadmin', '>= 1.0.0.pre1'
   s.add_dependency 'rails', '>= 1.0.0'
-  s.add_dependency 'sidekiq', '>= 1.0.0'
+  s.add_dependency 'sidekiq', '~> 6.0'
+  s.add_dependency 'aws-sdk-s3', '~> 1.50'
 
   s.add_development_dependency 'rubocop', '~> 0.75.1'
 end

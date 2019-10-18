@@ -13,6 +13,7 @@ module ActiveadminAsyncExporter
     def configure
       create_admin_reports_migration
       create_admin_reports_model
+      create_admin_reports_configuration
     end
 
     private
@@ -30,6 +31,13 @@ module ActiveadminAsyncExporter
         'admin_report.rb',
         'app/admin/models/admin_report.rb',
         user_class_name: user_class_name
+      )
+    end
+
+    def create_admin_reports_configuration
+      copy_file(
+        'active_record_async_reports.rb'
+        'config/initializers/active_record_async_reports.rb',
       )
     end
 

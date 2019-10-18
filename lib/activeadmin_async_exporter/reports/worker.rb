@@ -8,11 +8,13 @@ module ActiveadminAsyncExporter
       controller = options['controller'].classify.constantize.new
       columns = options['columns']
 
-      path = Rails.root.join('tmp', filename(controller))
+      file_path = Rails.root.join('tmp', filename(controller))
 
-      CSV.open(path, 'wb', headers: true) do |csv|
+      CSV.open(file_path, 'wb', headers: true) do |csv|
         build_csv(csv, columns, controller, options)
       end
+
+      upload_report(file_path)
     end
 
     private
@@ -38,6 +40,12 @@ module ActiveadminAsyncExporter
           csv << evaluators.collect { |ev| m.send(ev) }
         end
       end
+    end
+
+    def upload_report(file_path)
+      return unless ActiveadminAsyncExporter.configuration.upload_reports?
+
+      ActiveadminAsyncExporter.configuration.report_uploader.upload(file_path)
     end
   end
 end

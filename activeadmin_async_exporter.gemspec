@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.date        = '2019-10-09'
   s.summary     = 'Async exporter for Active Admin using Sidekiq'
   s.description = s.summary
-  s.authors     = ['Franco Pariani']
+  s.authors     = ['Franco Pariani', 'Horacio Bertorello']
   s.email       = 'franco@rootstrap.com'
   s.homepage    = 'https://rubygems.org/gems/activeadmin_async_exporter'
   s.license     = 'MIT'

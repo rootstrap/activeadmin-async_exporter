@@ -13,16 +13,18 @@ module ActiveadminAsyncExporter
       CSV.open(path, 'wb', headers: true) do |csv|
         build_csv(csv, columns, controller, options)
       end
+
+      AdminReport.find(options['admin_report_id']).update_attributes(status: :ready)
     end
 
     private
 
     def collection(controller, options)
-      controller.scoped_collection.ransack(options['query']).result
+      controller.current_collection.ransack(options['query']).result
     end
 
     def filename(controller)
-      [controller.scoped_collection.name.pluralize.downcase, Time.current.to_i].join('_') + '.csv'
+      [controller.current_collection.name.pluralize.downcase, Time.current.to_i].join('_') + '.csv'
     end
 
     def build_csv(csv, columns, controller, options)

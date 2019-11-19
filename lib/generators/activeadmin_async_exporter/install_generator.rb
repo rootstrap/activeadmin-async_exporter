@@ -13,6 +13,7 @@ module ActiveadminAsyncExporter
     def configure
       create_admin_reports_migration
       create_admin_reports_model
+      create_active_admin_view
     end
 
     private
@@ -21,20 +22,31 @@ module ActiveadminAsyncExporter
       migration_template(
         'migration.rb',
         'db/migrate/add_admin_reports.rb',
-        user_class_name: user_class_name
+        user_table_name: user_table_name
       )
     end
 
     def create_admin_reports_model
       template(
         'admin_report.rb',
-        'app/admin/models/admin_report.rb',
-        user_class_name: user_class_name
+        'app/models/admin_report.rb',
+        user_class: user_class
+      )
+    end
+
+    def create_active_admin_view
+      template(
+        'admin_reports.rb',
+        'app/admin/admin_reports.rb'
       )
     end
 
     def user_class_name
       user_class.underscore.singularize
+    end
+
+    def user_table_name
+      user_class_name.pluralize
     end
   end
 end

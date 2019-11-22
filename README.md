@@ -1,6 +1,6 @@
 # ActiveAdmin::AsyncExporter
 
-Async exporter for Active Admin using Sidekiq.
+Async exporter for Active Admin using ActiveJob.
 
 ## Installation
 All you have to do is add the gem to your project like this:

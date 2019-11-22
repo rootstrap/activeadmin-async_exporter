@@ -1,0 +1,6 @@
+# frozen_string_literal: true
+
+ActiveAdmin::AsyncExporter.configure do |config|
+  # config.aws_bucket_name = nil
+  # config.aws_bucket_folder_path = nil
+end

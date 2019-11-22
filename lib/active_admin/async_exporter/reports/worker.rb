@@ -6,15 +6,19 @@ module ActiveAdmin
       def perform(options = {})
         controller = options[:controller].classify.constantize.new
         columns = options[:columns]
-        file_name = options[:file_name]
+        file_name = filename(options[:file_name], controller)
 
-        path = Rails.root.join('tmp', filename(file_name, controller))
+        path = Rails.root.join('tmp', file_name)
 
         CSV.open(path, 'wb', headers: true) do |csv|
           build_csv(csv, columns, controller, options)
         end
 
-        AdminReport.find(options[:admin_report_id]).update_attributes(status: :ready)
+        file = Services::AwsS3Service.new(path: path, name: file_name).store
+        AdminReport.find(options[:admin_report_id]).update_attributes(
+          status: :ready,
+          location_url: file.url
+        )
       end
 
       private

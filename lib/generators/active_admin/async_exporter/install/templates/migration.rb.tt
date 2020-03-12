@@ -1,8 +1,7 @@
-class <%= migration_class_name %> < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
+class <%= migration_class_name %> < ActiveRecord::Migration<%= migration_version %>
   def change
     create_table :admin_reports do |t|
       t.references :author
-      t.foreign_key :<%= user_table_name %>, column: :author_id, primary_key: 'id'
 
       t.string :entity, null: false
       t.string :format, null: false, default: :csv
@@ -11,5 +10,7 @@ class <%= migration_class_name %> < ActiveRecord::Migration[<%= ActiveRecord::Mi
 
       t.timestamps
     end
+    <%= admin_report_users_foreign_key %>
+    add_index :admin_reports, :<%= user_class_name %>_id
   end
 end

@@ -13,7 +13,7 @@ module ActiveAdmin
 
           collection_action :download_csv, method: :post do
             admin_report = AdminReport.create!(
-              author_id: current_admin_user.id,
+              author_id: current_user.id,
               entity: current_collection.name,
               status: :pending
             )

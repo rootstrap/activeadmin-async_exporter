@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AdminReport < ApplicationRecord
-  enum status: { pending: 0, ready: 1, error: 2 }
+  <%= admin_report_status_enum %>
 
   belongs_to :author, class_name: '<%= user_class %>'
 end

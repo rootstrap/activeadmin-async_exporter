@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
 require 'activeadmin_async_exporter'
-require 'activeadmin_async_exporter/models/admin_report'
 require 'activeadmin_async_exporter/reports/dsl'
 require 'activeadmin_async_exporter/reports/worker'
 

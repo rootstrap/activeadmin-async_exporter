@@ -4,6 +4,22 @@ module ActiveAdmin
   module AsyncExporter
     module Reports
       module DSL
+        attr_reader :csv_fields
+
+        def csv_async(decorate_model: false)
+          @csv_fields ||= {}
+
+          yield
+
+          csv_report(columns: csv_fields, decorate_model: decorate_model)
+        end
+
+        def csv_column(column_name, column_value = nil)
+          column_value ||= column_name
+
+          csv_fields[:"#{column_name.to_sym}"] = column_value.to_sym
+        end
+
         def csv_report(columns:, decorate_model: false)
           action_item :download_csv, only: :index do
             link_to 'Download CSV',
@@ -12,6 +28,7 @@ module ActiveAdmin
           end
 
           collection_action :download_csv, method: :post do
+
             admin_report = AdminReport.create!(
               author_id: current_admin_user.id,
               entity: current_collection.name,

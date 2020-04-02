@@ -17,7 +17,7 @@ module ActiveAdmin
         def csv_column(column_name, column_value = nil)
           column_value ||= column_name
 
-          csv_fields[:"#{column_name.to_sym}"] = column_value.to_sym
+          csv_fields[column_name.to_sym] = column_value.to_s
         end
 
         def csv_report(columns:, decorate_model: false)
@@ -43,7 +43,7 @@ module ActiveAdmin
               query: params['q']
             }
 
-            ActiveAdmin::AsyncExporter::Worker.perform_async(options)
+            ActiveAdmin::AsyncExporter::Worker.perform_later(options)
             redirect_to admin_admin_report_path(admin_report)
           end
 

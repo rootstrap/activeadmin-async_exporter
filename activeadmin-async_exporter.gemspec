@@ -21,7 +21,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'activeadmin', '>= 1.0.0.pre1'
 
   s.add_dependency 'rails', '>= 1.0.0'
-  s.add_dependency 'sidekiq', '>= 1.0.0'
 
   s.add_development_dependency 'rubocop', '~> 0.75.1'
 end

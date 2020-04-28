@@ -6,12 +6,12 @@ module ActiveAdmin
       module DSL
         attr_reader :csv_fields
 
-        def csv_async(decorate_model: false)
+        def csv_async(decorate_model: false, file_name: nil)
           @csv_fields ||= {}
 
           yield
 
-          csv_report(columns: csv_fields, decorate_model: decorate_model)
+          csv_report(columns: csv_fields, decorate_model: decorate_model, file_name: file_name)
         end
 
         def csv_column(column_name, column_value = nil)
@@ -20,7 +20,7 @@ module ActiveAdmin
           csv_fields[column_name.to_sym] = column_value.to_s
         end
 
-        def csv_report(columns:, decorate_model: false)
+        def csv_report(columns:, decorate_model: false, file_name: nil)
           action_item :download_csv, only: :index do
             link_to 'Download CSV',
                     { action: :download_csv, params: params.to_enum.to_h },
@@ -40,6 +40,7 @@ module ActiveAdmin
               controller: self.class.name,
               columns: columns,
               decorate_model: decorate_model,
+              file_name: file_name,
               query: params['q']
             }
 

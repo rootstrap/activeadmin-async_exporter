@@ -6,8 +6,9 @@ module ActiveAdmin
       def perform(options = {})
         controller = options[:controller].classify.constantize.new
         columns = options[:columns]
+        file_name = options[:file_name]
 
-        path = Rails.root.join('tmp', filename(controller))
+        path = Rails.root.join('tmp', filename(file_name, controller))
 
         CSV.open(path, 'wb', headers: true) do |csv|
           build_csv(csv, columns, controller, options)
@@ -22,8 +23,9 @@ module ActiveAdmin
         controller.current_collection.ransack(options['query']).result
       end
 
-      def filename(controller)
-        [controller.current_collection.name.pluralize.downcase, Time.current.to_i].join('_') + '.csv'
+      def filename(file_name, controller)
+        file_name ||= controller.current_collection.name.pluralize.downcase
+        [file_name, Time.current.to_i].join('_') + '.csv'
       end
 
       def build_csv(csv, columns, controller, options)

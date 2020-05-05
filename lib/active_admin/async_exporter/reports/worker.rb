@@ -19,8 +19,17 @@ module ActiveAdmin
 
       private
 
+      def proc_from_string(code_string)
+        proc_string = code_from_string(code_string)
+        Proc.class_eval("proc #{proc_string}")
+      end
+
+      def code_from_string(code_string)
+        code_string.scan(%r/(do|{)\s+(\|.*\|)(.*)(end|})/m).flatten.join('')
+      end
+
       def collection(controller, options)
-        controller.current_collection.ransack(options['query']).result
+        controller.current_collection.ransack(options[:query]).result
       end
 
       def filename(file_name, controller)
@@ -38,7 +47,20 @@ module ActiveAdmin
           group.each do |m|
             m = m.decorate if options[:decorate_model]
 
-            csv << evaluators.collect { |ev| m.send(ev) }
+            csv << csv_field_value(m, evaluators)
+          end
+        end
+      end
+
+      def csv_field_value(m, evaluators)
+        evaluators.collect do |ev|
+          value = ev[:value]
+
+          if ev[:block]
+            code_proc = proc_from_string(value)
+            code_proc.yield(m)
+          else
+            m.send(value)
           end
         end
       end

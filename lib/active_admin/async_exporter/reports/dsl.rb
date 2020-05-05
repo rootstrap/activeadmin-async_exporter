@@ -14,10 +14,15 @@ module ActiveAdmin
           csv_report(columns: csv_fields, decorate_model: decorate_model, file_name: file_name)
         end
 
-        def csv_column(column_name, column_value = nil)
+        def csv_column(column_name, column_value = nil, &block)
           column_value ||= column_name
 
-          csv_fields[column_name.to_sym] = column_value.to_s
+          column_value = block.source if block_given?
+
+          raise ActiveAdmin::AsyncExporter::Error, 'No argument given' if block_given? &&
+                                                                          block.parameters.blank?
+
+          csv_fields[column_name.to_sym] = { block: block_given?, value: column_value.to_s }
         end
 
         def csv_report(columns:, decorate_model: false, file_name: nil)
@@ -56,5 +61,7 @@ module ActiveAdmin
         end
       end
     end
+
+    class Error < ActiveAdmin::Error; end
   end
 end

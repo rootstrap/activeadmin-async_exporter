@@ -9,4 +9,7 @@ ActiveAdmin::AsyncExporter.configure do |config|
   ## AWS S3
   # config.aws_bucket_name = nil
   # config.aws_bucket_folder_path = nil
+
+  ## Disk
+  config.disk_folder_path = Rails.root.join('exporter')
 end

@@ -10,6 +10,8 @@ module ActiveAdmin
           case ActiveAdmin::AsyncExporter.config.service
           when :amazon
             Services::AwsS3Service.new(*args)
+          else
+            Services::DiskService.new(*args)
           end
         end
       end

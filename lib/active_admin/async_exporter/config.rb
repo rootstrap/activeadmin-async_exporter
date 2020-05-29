@@ -13,7 +13,7 @@ module ActiveAdmin
     end
 
     class Config
-      attr_accessor :aws_bucket_name, :aws_bucket_folder_path
+      attr_accessor :service, :aws_bucket_name, :aws_bucket_folder_path
 
       def initialize
         @aws_bucket_name = nil

@@ -14,7 +14,7 @@ module ActiveAdmin
           build_csv(csv, columns, controller, options)
         end
 
-        file = Services::AwsS3Service.new(path: path, name: file_name).store
+        file = Services::StorageService.call(path: path, name: file_name).store
         AdminReport.find(options[:admin_report_id]).update_attributes(
           status: :ready,
           location_url: file.url

@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/rootstrap/activeadmin-async_exporter.svg?branch=master)](https://travis-ci.org/rootstrap/activeadmin-async_exporter)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c0bcdb8b4c29dbaa4072/maintainability)](https://codeclimate.com/github/rootstrap/activeadmin-async_exporter/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/c0bcdb8b4c29dbaa4072/test_coverage)](https://codeclimate.com/github/rootstrap/activeadmin-async_exporter/test_coverage)
+
 # ActiveAdmin::AsyncExporter
 
 Async exporter for Active Admin using ActiveJob.

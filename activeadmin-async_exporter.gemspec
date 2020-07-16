@@ -19,9 +19,12 @@ Gem::Specification.new do |s|
 
   # Dependencies
   s.add_runtime_dependency 'activeadmin', '>= 1.0.0.pre1'
-
-  s.add_dependency 'rails', '>= 1.0.0'
   s.add_dependency 'aws-sdk-s3', '~> 1'
+  s.add_dependency 'rails', '>= 1.0.0'
 
+  # Development dependencies
+  s.add_development_dependency 'reek', '~> 5.5.0'
+  s.add_development_dependency 'rspec', '~> 3.9.0'
   s.add_development_dependency 'rubocop', '~> 0.75.1'
+  s.add_development_dependency 'simplecov', '~> 0.17.1'
 end

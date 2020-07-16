@@ -2,7 +2,7 @@
 
 module ActiveAdmin
   module AsyncExporter
-    class Worker < ActiveJob::Base
+    class Worker < ApplicationJob
       def perform(options = {})
         controller = options[:controller].classify.constantize.new
         columns = options[:columns]
@@ -15,7 +15,7 @@ module ActiveAdmin
         end
 
         file = Services::StorageService.call(path: path, name: file_name).store
-        AdminReport.find(options[:admin_report_id]).update_attributes(
+        AdminReport.find(options[:admin_report_id]).update_attributes!(
           status: :ready,
           location_url: file.url
         )
@@ -29,7 +29,7 @@ module ActiveAdmin
       end
 
       def code_from_string(code_string)
-        code_string.scan(%r/(do|{)\s+(\|.*\|)(.*)(end|})/m).flatten.join('')
+        code_string.scan(%r{/(do|{)\s+(\|.*\|)(.*)(end|})/m}).flatten.join('')
       end
 
       def collection(controller, options)
@@ -48,23 +48,23 @@ module ActiveAdmin
         csv << headers.map(&:to_s)
 
         collection(controller, options).find_in_batches do |group|
-          group.each do |m|
-            m = m.decorate if options[:decorate_model]
+          group.each do |model|
+            model = model.decorate if options[:decorate_model]
 
-            csv << csv_field_value(m, evaluators)
+            csv << csv_field_value(model, evaluators)
           end
         end
       end
 
-      def csv_field_value(m, evaluators)
+      def csv_field_value(model, evaluators)
         evaluators.collect do |ev|
           value = ev[:value]
 
           if ev[:block]
             code_proc = proc_from_string(value)
-            code_proc.yield(m)
+            code_proc.yield(model)
           else
-            m.send(value)
+            model.send(value)
           end
         end
       end

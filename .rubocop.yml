@@ -1,3 +1,32 @@
 inherit_gem:
   rubocop-rootstrap:
     - config/rails.yml
+
+inherit_mode:
+  merge:
+    - Exclude
+
+Metrics/AbcSize:
+  Exclude:
+    - lib/active_admin/async_exporter/reports/dsl.rb
+    - lib/active_admin/async_exporter/reports/worker.rb
+
+Metrics/MethodLength:
+  Exclude:
+    - lib/active_admin/async_exporter/reports/dsl.rb
+
+Lint/NestedMethodDefinition:
+  Exclude:
+    - lib/active_admin/async_exporter/reports/dsl.rb
+
+Rails/ActiveRecordAliases:
+  Exclude:
+    - lib/active_admin/async_exporter/reports/worker.rb
+
+Naming/FileName:
+  Exclude:
+    - lib/activeadmin-async_exporter.rb
+
+Style/EvalWithLocation:
+  Exclude:
+    - lib/active_admin/async_exporter/reports/worker.rb

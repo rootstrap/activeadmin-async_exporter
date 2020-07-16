@@ -29,11 +29,11 @@ module ActiveAdmin
           action_item :download_csv, only: :index do
             link_to 'Download CSV',
                     { action: :download_csv, params: params.to_enum.to_h },
-                    method: :post, data: { confirm: 'Are you sure you want to generate this report?' }
+                    method: :post,
+                    data: { confirm: 'Are you sure you want to generate this report?' }
           end
 
           collection_action :download_csv, method: :post do
-
             admin_report = AdminReport.create!(
               author_id: current_admin_user.id,
               entity: current_collection.name,

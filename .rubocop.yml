@@ -1,18 +1,32 @@
-Documentation:
-  Enabled: false
+inherit_gem:
+  rubocop-rootstrap:
+    - config/rails.yml
+
+inherit_mode:
+  merge:
+    - Exclude
 
 Metrics/AbcSize:
-  Max: 15
+  Exclude:
+    - lib/active_admin/async_exporter/reports/dsl.rb
+    - lib/active_admin/async_exporter/reports/worker.rb
 
 Metrics/MethodLength:
-  CountComments: false
-  Max: 24
+  Exclude:
+    - lib/active_admin/async_exporter/reports/dsl.rb
 
-Metrics/LineLength:
-  Max: 100
+Lint/NestedMethodDefinition:
+  Exclude:
+    - lib/active_admin/async_exporter/reports/dsl.rb
 
-Style/SymbolArray:
-  Enabled: true
+Rails/ActiveRecordAliases:
+  Exclude:
+    - lib/active_admin/async_exporter/reports/worker.rb
 
-Style/BlockDelimiters:
-  EnforcedStyle: braces_for_chaining
+Naming/FileName:
+  Exclude:
+    - lib/activeadmin-async_exporter.rb
+
+Style/EvalWithLocation:
+  Exclude:
+    - lib/active_admin/async_exporter/reports/worker.rb

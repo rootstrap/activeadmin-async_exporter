@@ -34,7 +34,7 @@ module ActiveAdmin
 
         def bucket_folder
           path = ActiveAdmin::AsyncExporter.config.aws_bucket_folder_path
-          return '' unless path.present?
+          return '' if path.blank?
 
           "#{path}/"
         end

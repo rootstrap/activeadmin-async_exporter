@@ -29,7 +29,7 @@ module ActiveAdmin
       end
 
       def code_from_string(code_string)
-        code_string.scan(%r{/(do|{)\s+(\|.*\|)(.*)(end|})/m}).flatten.join('')
+        code_string.scan(/(do|{)\s+(\|.*\|)(.*)(end|})/m).flatten.join('')
       end
 
       def collection(controller, options)

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 # encoding: utf-8
 
-require 'open-uri'
-
 ActiveAdmin.register AdminReport do
   actions :index, :show, :destroy
 
@@ -42,7 +40,9 @@ ActiveAdmin.register AdminReport do
   end
 
   member_action :download_file, method: :get do
-    send_data(open(resource.location_url).read, disposition: 'attachment', filename: /(?!.*\/).+/.match(resource.location_url)[0])
+    send_data(File.open(resource.location_url).read,
+              disposition: 'attachment',
+              filename: %r{(?!.*/).+}.match(resource.location_url)[0])
   end
 
   controller do

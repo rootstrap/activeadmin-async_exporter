@@ -1,0 +1,52 @@
+# frozen_string_literal: true
+
+ActiveAdmin.register AdminReport do
+  actions :index, :show, :destroy
+
+  filter :entity
+  filter :format
+  filter :created_at
+  filter :location_url
+
+  index do
+    id_column
+    column :author
+    column :entity
+    column :format
+    column :status
+    column :file do |report|
+      link_to 'Download CSV', download_file_admin_admin_report_path(report) if report.ready?
+    end
+    column :created_at
+
+    actions
+  end
+
+  show do
+    attributes_table_for(admin_report) do
+      row :id
+      row :author
+      row :entity
+      row :format
+      row 'Status' do
+        status_tag (admin_report.ready? ? 'green' : 'orange'), label: admin_report.status
+      end
+      row :file do
+        link_to 'Download CSV', download_file_admin_admin_report_path if admin_report.ready?
+      end
+      row :created_at
+    end
+  end
+
+  member_action :download_file, method: :get do
+    send_data(File.open(resource.location_url).read,
+              disposition: 'attachment',
+              filename: %r{(?!.*/).+}.match(resource.location_url)[0])
+  end
+
+  controller do
+    def scoped_collection
+      AdminReport.includes(:author)
+    end
+  end
+end

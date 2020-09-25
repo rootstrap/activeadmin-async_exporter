@@ -27,4 +27,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop-rails', '~> 2.3'
   s.add_development_dependency 'rubocop-rootstrap', '~> 0.1.0'
   s.add_development_dependency 'simplecov', '~> 0.17.1'
+  s.add_development_dependency 'sqlite3', '1.4.1'
+  s.add_development_dependency 'pry-rails'
 end

@@ -30,3 +30,11 @@ Naming/FileName:
 Style/EvalWithLocation:
   Exclude:
     - lib/active_admin/async_exporter/reports/worker.rb
+
+Style/StringLiterals:
+  Exclude:
+    - spec/dummy/db/schema.rb
+
+Style/NumericLiterals:
+  Exclude:
+    - spec/dummy/db/schema.rb

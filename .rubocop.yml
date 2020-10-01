@@ -38,3 +38,7 @@ Style/StringLiterals:
 Style/NumericLiterals:
   Exclude:
     - spec/dummy/db/schema.rb
+
+Layout/EmptyLinesAroundBlockBody:
+  Exclude:
+    - spec/dummy/db/schema.rb

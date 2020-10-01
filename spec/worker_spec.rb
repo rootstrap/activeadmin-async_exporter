@@ -1,6 +1,6 @@
 RSpec.describe ActiveAdmin::AsyncExporter::Worker do
   let!(:users) do
-    ['user_1', 'user_2', 'user_3'].map do |username|
+    %w[user_1 user_2 user_3].map do |username|
       User.find_or_create_by!(username: username)
     end
   end
@@ -19,7 +19,7 @@ RSpec.describe ActiveAdmin::AsyncExporter::Worker do
                         status: :pending)
   end
 
-  let(:columns) { { username: { block: false, value: "username" } } }
+  let(:columns) { { username: { block: false, value: 'username' } } }
 
   let(:options) do
     {
@@ -112,7 +112,7 @@ RSpec.describe ActiveAdmin::AsyncExporter::Worker do
 
     context 'when the column is a block' do
       let(:block) do
-        Proc.new { |user| "The username is: #{user.username}" }
+        proc { |user| "The username is: #{user.username}" }
       end
       let(:csv_fixture_file_name) { 'block' }
       let(:columns) { { test_block: { block: true, value: block.source } } }
@@ -122,7 +122,7 @@ RSpec.describe ActiveAdmin::AsyncExporter::Worker do
 
     context 'when we have multiple columns' do
       let(:block) do
-        Proc.new { |user| "The username is: #{user.username}" }
+        proc { |user| "The username is: #{user.username}" }
       end
 
       let(:csv_fixture_file_name) { 'username_and_block' }

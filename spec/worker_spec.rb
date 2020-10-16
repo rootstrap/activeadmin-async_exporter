@@ -52,6 +52,7 @@ RSpec.describe ActiveAdmin::AsyncExporter::Worker do
 
     shared_examples 'creates the physical file with data' do
       it 'creates the physical file at the given location_url' do
+        expect { File.open(admin_report.reload.location_url.to_s) }.to raise_exception(Errno::ENOENT)
         subject
         expect(File.open(admin_report.reload.location_url)).to be
       end
@@ -80,7 +81,7 @@ RSpec.describe ActiveAdmin::AsyncExporter::Worker do
     end
 
     it 'changes admin_report location_url' do
-      expect { subject }.to change { admin_report.reload.location_url }
+      expect { subject }.to change { admin_report.reload.location_url }.from(nil).to(file_path)
     end
 
     context 'when the file_name is given' do

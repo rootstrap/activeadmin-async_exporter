@@ -42,12 +42,12 @@ RSpec.describe ActiveAdmin::AsyncExporter::Worker do
     let(:file_path) { "#{csv_path}/#{full_file_name}" }
 
     before do
-      Timecop.freeze(test_date)
+      travel_to(test_date)
     end
 
     after do
       FileUtils.rm(file_path)
-      Timecop.return
+      travel_back
     end
 
     shared_examples 'creates the physical file with data' do

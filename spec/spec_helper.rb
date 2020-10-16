@@ -2,7 +2,6 @@
 
 ENV['RAILS_ENV'] ||= 'test'
 require 'dummy/config/environment.rb'
-require 'pry'
 require 'active_admin'
 require 'support/time_helpers.rb'
 

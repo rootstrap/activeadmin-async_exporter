@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry'
-
 module ActiveAdmin
   module AsyncExporter
     class Worker < ApplicationJob

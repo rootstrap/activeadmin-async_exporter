@@ -10,6 +10,7 @@ require 'action_controller/railtie'
 require 'action_view/railtie'
 require 'sprockets/railtie'
 require 'active_storage/engine'
+require 'pry'
 
 Bundler.require(*Rails.groups)
 

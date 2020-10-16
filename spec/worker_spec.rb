@@ -8,7 +8,7 @@ RSpec.describe ActiveAdmin::AsyncExporter::Worker do
   let(:decorate_model) { false }
   let(:file_name) { 'file_name' }
   let(:query) { nil }
-  let(:csv_path) { './csv' }
+  let(:csv_path) { Rails.root.join('tmp/activeadmin-async_exporter') }
   let(:admin) { User.find_or_create_by!(username: 'AdminUser') }
   let(:csv_fixture_file_path) { "./spec/fixtures/files/#{csv_fixture_file_name}.csv" }
   let(:csv_fixture_file_name) { 'username' }

@@ -1,7 +1,16 @@
 # frozen_string_literal: true
 
-require 'bundler/setup'
-require 'activeadmin-async_exporter'
+ENV['RAILS_ENV'] ||= 'test'
+require 'dummy/config/environment.rb'
+require 'active_admin'
+require 'support/time_helpers.rb'
+
+require 'simplecov'
+SimpleCov.start
+
+Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+
+require 'tmpdir'
 
 require 'simplecov'
 SimpleCov.start

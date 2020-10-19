@@ -18,7 +18,7 @@ module ActiveAdmin
       def initialize
         @aws_bucket_name = nil
         @aws_bucket_folder_path = nil
-        @disk_folder_path = nil
+        @disk_folder_path = Rails.root.join('tmp/activeadmin-async_exporter')
       end
     end
   end

@@ -15,7 +15,7 @@ module ActiveAdmin
         end
 
         file = Services::StorageService.call(path: path, name: file_name).store
-        AdminReport.find(options[:admin_report_id]).update_attributes!(
+        AdminReport.find(options[:admin_report_id]).update!(
           status: :ready,
           location_url: file.url
         )

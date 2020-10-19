@@ -12,13 +12,6 @@ Rails.application.routes.default_url_options[:host] = 'localhost:3000'
 
 require 'tmpdir'
 
-ActiveRecord::Base.establish_connection(
-  adapter: 'sqlite3',
-  database: ':memory:'
-)
-
-load 'dummy/db/schema.rb'
-
 require 'simplecov'
 SimpleCov.start
 
